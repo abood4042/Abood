@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفحتي الرسمية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{
+  width:100%; min-height:100%; font-family:'Cairo',sans-serif;
+  padding:10px; display:flex; justify-content:center; align-items:flex-end;
+  overflow:hidden;
+
+  /* تدرج ثابت يتحرك بسلاسة */
+  background: linear-gradient(45deg, #3a0ca3, #4361ee, #4cc9f0, #f72585);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
+}
+
+@keyframes gradientBG{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.container{
+  position:absolute; bottom:20px; opacity:0; transform:translateY(20px);
+  transition: all 0.6s ease; background: rgba(248,249,255,0.95);
+  color:#333; padding:20px 15px; border-radius:15px; max-width:300px; width:90%;
+  text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.1); z-index:10;
+}
+.container.loaded{opacity:1; transform:translateY(0);}
+.profile-img{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #4361ee;margin:0 auto 15px;transition:0.4s;}
+.profile-img:hover{transform:scale(1.05) rotate(3deg); box-shadow:0 0 15px rgba(67,97,238,0.3);}
+h1{font-size:20px;margin-bottom:8px;color:#2b2d42;}
+.clock-container{margin:10px auto;}
+.clock-digital{font-family:'Cairo',monospace;font-size:20px;font-weight:700;letter-spacing:1px;
+  background: linear-gradient(135deg, #6a11cb, #4361ee); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  display:inline-block;border-radius:12px;padding:6px 12px; box-shadow:0 3px 10px rgba(106,17,203,0.2);}
+.dot{color:#4361ee; animation:pulse 1s infinite alternate;}
+@keyframes pulse{0%{opacity:0.5}100%{opacity:1}}
+#ampm{font-size:14px;margin-left:4px;color:#4361ee;font-weight:600;}
+.clock-date{margin-top:4px;font-size:12px;color:#4361ee;font-weight:600;}
+.bio{font-size:13px;margin-bottom:15px;line-height:1.4;color:#555;}
+.social-icons{display:flex;flex-direction:column;gap:12px;margin-bottom:15px;align-items:center;}
+.social-icons a{text-decoration:none;display:flex;flex-direction:row;align-items:center;gap:8px;color:#555;transition:all 0.3s ease;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,0.7);box-shadow:0 2px 8px rgba(0,0,0,0.1);width:80%;}
+.social-icons a i{font-size:20px;transition:0.3s;}
+.social-icons a:hover{transform:translateY(-1px) scale(1.02);box-shadow:0 6px 15px rgba(0,0,0,0.2);background:rgba(255,255,255,1);}
+.facebook i{color:#1877f2;}
+.telegram i{color:#0088cc;}
+.instagram i{color:#E1306C;}
+.audio-player audio{width:100%;outline:none;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <img src="n.jpg" alt="صورتك" class="profile-img" loading="lazy">
+  <h1>اسمك هنا</h1>
+
+  <div class="clock-container">
+    <div class="clock-digital">
+      <span id="clock-hours">00</span><span class="dot">:</span>
+      <span id="clock-minutes">00</span><span class="dot">:</span>
+      <span id="clock-seconds">00</span>
+      <span id="ampm">ص</span>
+    </div>
+    <div class="clock-date" id="clock-date">الاثنين، 5 أبريل</div>
+  </div>
+
+  <p class="bio">أهلاً بك في صفحتي الرسمية، تواصل معي عبر الروابط أدناه.</p>
+
+  <div class="social-icons">
+    <a href="https://www.facebook.com/share/1633mzZDBh/" target="_blank" class="facebook">
+      <i class="fab fa-facebook"></i> فيسبوك
+    </a>
+    <a href="https://t.me/@abd_S99" target="_blank" class="telegram" onclick="copyUsername('@يوزر_تلكرام'); return false;">
+      <i class="fab fa-telegram"></i> تليجرام
+      <span id="copy-msg" style="opacity:0;color:green;font-size:12px;margin-right:4px;">تم النسخ!</span>
+    </a>
+    <a href="https://www.instagram.com/1_u2z?igsh=OHhwZ3o5MTVyYnQ2" target="_blank" class="instagram">
+      <i class="fab fa-instagram"></i> إنستغرام
+    </a>
+  </div>
+
+  <div class="audio-player">
+    <audio controls loop>
+      <source src="m3.mp3" type="audio/mpeg">
+      <source src="m3.ogg" type="audio/ogg">
+      متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+  </div>
+</div>
+
+<script>
+function copyUsername(username){
+  navigator.clipboard.writeText(username).then(()=>{
+    const msg=document.getElementById('copy-msg');
+    msg.style.opacity=1;
+    setTimeout(()=>msg.style.opacity=0,2000);
+  }).catch(err=>console.error('فشل النسخ:',err));
+}
+
+function updateClock(){
+  const now=new Date();
+  let hours=now.getHours();
+  const minutes=String(now.getMinutes()).padStart(2,'0');
+  const seconds=String(now.getSeconds()).padStart(2,'0');
+  const ampm=hours>=12?'م':'ص';
+  hours=hours%12; hours=hours?hours:12;
+  document.getElementById('clock-hours').textContent=String(hours).padStart(2,'0');
+  document.getElementById('clock-minutes').textContent=minutes;
+  document.getElementById('clock-seconds').textContent=seconds;
+  document.getElementById('ampm').textContent=ampm;
+  const options={weekday:'long',day:'numeric',month:'long'};
+  document.getElementById('clock-date').textContent=new Intl.DateTimeFormat('ar-TN',options).format(now);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelector('.container').classList.add('loaded');
+  updateClock();
+  setInterval(updateClock,1000);
+});
+</script>
+
+</body>
+</html>
