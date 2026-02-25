@@ -3,129 +3,390 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdulsattar</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Abdulsattar - بطاقة تعريفية عصرية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{
-  width:100%; min-height:100%; font-family:'Cairo',sans-serif;
-  padding:10px; display:flex; justify-content:center; align-items:flex-end;
-  overflow:hidden;
-
-  /* تدرج ثابت يتحرك بسلاسة */
-  background: linear-gradient(45deg, #3a0ca3, #4361ee, #4cc9f0, #f72585);
-  background-size: 400% 400%;
-  animation: gradientBG 20s ease infinite;
+body {
+  font-family: 'Cairo', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f0c1f;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes gradientBG{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+/* خلفية متحركة فاخرة */
+body::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 10% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+  animation: rotate 30s linear infinite;
 }
 
-.container{
-  position:absolute; bottom:20px; opacity:0; transform:translateY(20px);
-  transition: all 0.6s ease; background: rgba(248,249,255,0.95);
-  color:#333; padding:20px 15px; border-radius:15px; max-width:300px; width:90%;
-  text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.1); z-index:10;
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
-.container.loaded{opacity:1; transform:translateY(0);}
-.profile-img{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #4361ee;margin:0 auto 15px;transition:0.4s;}
-.profile-img:hover{transform:scale(1.05) rotate(3deg); box-shadow:0 0 15px rgba(67,97,238,0.3);}
-h1{font-size:20px;margin-bottom:8px;color:#2b2d42;}
-.clock-container{margin:10px auto;}
-.clock-digital{font-family:'Cairo',monospace;font-size:20px;font-weight:700;letter-spacing:1px;
-  background: linear-gradient(135deg, #6a11cb, #4361ee); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  display:inline-block;border-radius:12px;padding:6px 12px; box-shadow:0 3px 10px rgba(106,17,203,0.2);}
-.dot{color:#4361ee; animation:pulse 1s infinite alternate;}
-@keyframes pulse{0%{opacity:0.5}100%{opacity:1}}
-#ampm{font-size:14px;margin-left:4px;color:#4361ee;font-weight:600;}
-.clock-date{margin-top:4px;font-size:12px;color:#4361ee;font-weight:600;}
-.bio{font-size:13px;margin-bottom:15px;line-height:1.4;color:#555;}
-.social-icons{display:flex;flex-direction:column;gap:12px;margin-bottom:15px;align-items:center;}
-.social-icons a{text-decoration:none;display:flex;flex-direction:row;align-items:center;gap:8px;color:#555;transition:all 0.3s ease;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,0.7);box-shadow:0 2px 8px rgba(0,0,0,0.1);width:80%;}
-.social-icons a i{font-size:20px;transition:0.3s;}
-.social-icons a:hover{transform:translateY(-1px) scale(1.02);box-shadow:0 6px 15px rgba(0,0,0,0.2);background:rgba(255,255,255,1);}
-.facebook i{color:#1877f2;}
-.telegram i{color:#0088cc;}
-.instagram i{color:#E1306C;}
-.audio-player audio{width:100%;outline:none;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+
+.container {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+  padding: 40px 25px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+              inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transform: translateY(0);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* الحواف المضيئة */
+.container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #6366f1, #a855f7, #ec4899, #6366f1);
+  border-radius: 42px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s;
+  filter: blur(10px);
+}
+
+.container:hover::before {
+  opacity: 0.5;
+}
+
+.profile-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-img-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  background: linear-gradient(45deg, #6366f1, #a855f7, #ec4899) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 3px;
+}
+
+.profile-img:hover {
+  transform: scale(1.1) rotate(5deg);
+  transition: 0.5s;
+}
+
+.status-badge {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 15px;
+  height: 15px;
+  background: #10b981;
+  border: 3px solid #1f1a3a;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+h1 {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  background: linear-gradient(135deg, #fff, #cbd5e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+/* الساعة بشكل عصري */
+.clock-modern {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+  padding: 15px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.clock-time {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  font-feature-settings: "tnum";
+  letter-spacing: 3px;
+}
+
+.clock-date {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* النص القرآني */
+.quran-verse {
+  background: rgba(99, 102, 241, 0.1);
+  border-right: 4px solid #6366f1;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  font-family: 'Amiri', serif;
+  font-size: 18px;
+  line-height: 2;
+  color: #e2e8f0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.quran-verse::before {
+  content: '﴿';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 40px;
+  color: rgba(99, 102, 241, 0.2);
+  font-family: 'Amiri', serif;
+}
+
+.quran-verse::after {
+  content: '﴾';
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 40px;
+  color: rgba(99, 102, 241, 0.2);
+  font-family: 'Amiri', serif;
+}
+
+/* الأيقونات الاجتماعية بتصميم عصري */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.social-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 15px 5px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s;
+  backdrop-filter: blur(5px);
+}
+
+.social-card:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: #6366f1;
+  transform: translateY(-5px);
+}
+
+.social-card i {
+  font-size: 24px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.social-card span {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.facebook-card i { color: #1877f2; }
+.telegram-card i { color: #0088cc; }
+.instagram-card i { color: #e1306c; }
+
+/* مشغل الصوت العصري */
+.audio-player-modern {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+}
+
+.audio-progress {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.audio-progress::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 30%;
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  border-radius: 5px;
+  animation: progress 3s infinite;
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 30%; }
+}
+
+.audio-time {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* زر النسخ */
+.copy-btn-modern {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 50px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.copy-btn-modern:hover {
+  background: #6366f1;
+  border-color: #6366f1;
+}
 </style>
 </head>
 <body>
-
 <div class="container">
-  <img src="n.jpg" alt="صورتك" class="profile-img" loading="lazy">
-  <h1>عبد الستار محمد</h1>
-
-  <div class="clock-container">
-    <div class="clock-digital">
-      <span id="clock-hours">00</span><span class="dot">:</span>
-      <span id="clock-minutes">00</span><span class="dot">:</span>
-      <span id="clock-seconds">00</span>
-      <span id="ampm">ص</span>
+  <div class="profile-section">
+    <div class="profile-img-wrapper">
+      <img src="n.jpg" alt="عبد الستار محمد" class="profile-img" loading="lazy">
+      <span class="status-badge"></span>
     </div>
-    <div class="clock-date" id="clock-date">الاثنين، 5 أبريل</div>
+    <h1>عبد الستار محمد</h1>
+    <div class="title">مطور واجهات مستخدم</div>
   </div>
 
-  <p class="bio" style="font-family:'Amiri', serif; font-size:16px; font-weight:600; line-height:1.6; text-align:center; color:#2b2d42;">
-( الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ )
-</p>
+  <div class="clock-modern">
+    <div class="clock-time" id="modern-time">--:--:--</div>
+    <div class="clock-date" id="modern-date">...</div>
+  </div>
 
-  <div class="social-icons">
-    <a href="https://www.facebook.com/share/1633mzZDBh/" target="_blank" class="facebook">
-      <i class="fab fa-facebook"></i> فيسبوك
+  <div class="quran-verse">
+    الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ
+  </div>
+
+  <div class="social-grid">
+    <a href="https://www.facebook.com/share/1633mzZDBh/" target="_blank" class="social-card facebook-card">
+      <i class="fab fa-facebook"></i>
+      <span>فيسبوك</span>
     </a>
-    <a href="https://t.me/@abd_S99" target="_blank" class="telegram" onclick="copyUsername('@abd_S99'); return false;">
-      <i class="fab fa-telegram"></i> تليجرام
-      <span id="copy-msg" style="opacity:0;color:green;font-size:12px;margin-right:4px;">تم النسخ!</span>
+    <a href="#" class="social-card telegram-card" onclick="copyUsername('@abd_S99'); return false;">
+      <i class="fab fa-telegram"></i>
+      <span>تليجرام</span>
     </a>
-    <a href="https://www.instagram.com/1_u2z?igsh=OHhwZ3o5MTVyYnQ2" target="_blank" class="instagram">
-      <i class="fab fa-instagram"></i> إنستغرام
+    <a href="https://www.instagram.com/1_u2z" target="_blank" class="social-card instagram-card">
+      <i class="fab fa-instagram"></i>
+      <span>انستغرام</span>
     </a>
   </div>
 
-  <div class="audio-player">
-    <audio controls loop>
-      <source src="m3.mp3" type="audio/mpeg">
-      <source src="m3.ogg" type="audio/ogg">
-      متصفحك لا يدعم تشغيل الصوت.
-    </audio>
+  <div class="audio-player-modern">
+    <div class="audio-controls">
+      <i class="fas fa-play-circle" style="color:#6366f1; font-size:24px;"></i>
+      <div class="audio-progress"></div>
+      <span class="audio-time">2:45 / 4:30</span>
+    </div>
   </div>
+
+  <button class="copy-btn-modern" onclick="copyUsername('@abd_S99')">
+    <i class="fas fa-copy"></i>
+    نسخ اسم المستخدم
+  </button>
+  <span id="copy-msg" style="color:#10b981; opacity:0; transition:0.3s; display:block; text-align:center;">تم النسخ!</span>
 </div>
 
 <script>
-function copyUsername(username){
-  navigator.clipboard.writeText(username).then(()=>{
-    const msg=document.getElementById('copy-msg');
-    msg.style.opacity=1;
-    setTimeout(()=>msg.style.opacity=0,2000);
-  }).catch(err=>console.error('فشل النسخ:',err));
+function copyUsername(username) {
+  navigator.clipboard.writeText(username).then(() => {
+    const msg = document.getElementById('copy-msg');
+    msg.style.opacity = 1;
+    setTimeout(() => msg.style.opacity = 0, 2000);
+  });
 }
 
-function updateClock(){
-  const now=new Date();
-  let hours=now.getHours();
-  const minutes=String(now.getMinutes()).padStart(2,'0');
-  const seconds=String(now.getSeconds()).padStart(2,'0');
-  const ampm=hours>=12?'م':'ص';
-  hours=hours%12; hours=hours?hours:12;
-  document.getElementById('clock-hours').textContent=String(hours).padStart(2,'0');
-  document.getElementById('clock-minutes').textContent=minutes;
-  document.getElementById('clock-seconds').textContent=seconds;
-  document.getElementById('ampm').textContent=ampm;
-  const options={weekday:'long',day:'numeric',month:'long'};
-  document.getElementById('clock-date').textContent=new Intl.DateTimeFormat('ar-TN',options).format(now);
+function updateModernClock() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('ar-EG', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const date = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  
+  document.getElementById('modern-time').textContent = time;
+  document.getElementById('modern-date').textContent = date;
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  document.querySelector('.container').classList.add('loaded');
-  updateClock();
-  setInterval(updateClock,1000);
-});
+updateModernClock();
+setInterval(updateModernClock, 1000);
 </script>
-
 </body>
 </html>
