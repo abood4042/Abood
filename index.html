@@ -3,390 +3,533 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdulsattar - بطاقة تعريفية عصرية</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Abdulsattar - بطاقة رمضانية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
 body {
-  font-family: 'Cairo', sans-serif;
+  margin: 0;
   min-height: 100vh;
+  background: linear-gradient(145deg, #0b1a2e 0%, #1a2f3f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0f0c1f;
+  font-family: 'Cairo', sans-serif;
+  padding: 20px;
   position: relative;
+  overflow-x: hidden;
+}
+
+/* الخلفية الرمضانية */
+.ramadan-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* النجوم المتلألئة */
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  animation: starsTwinkle 4s infinite;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: starGlow 3s infinite;
+}
+
+@keyframes starGlow {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 10px gold; }
+}
+
+/* الفوانيس */
+.lantern {
+  position: absolute;
+  font-size: 60px;
+  opacity: 0.2;
+  animation: lanternFloat 8s infinite ease-in-out;
+}
+
+.lantern-1 { top: 10%; right: 5%; animation-delay: 0s; }
+.lantern-2 { bottom: 10%; left: 5%; animation-delay: 2s; font-size: 80px; }
+.lantern-3 { top: 20%; left: 10%; animation-delay: 4s; font-size: 40px; }
+
+@keyframes lanternFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* الهلال */
+.crescent {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  font-size: 100px;
+  color: rgba(255, 215, 0, 0.1);
+  animation: crescentGlow 5s infinite;
+}
+
+@keyframes crescentGlow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(255,215,0,0.3)); }
+  50% { filter: drop-shadow(0 0 20px rgba(255,215,0,0.6)); }
+}
+
+/* المسجد */
+.mosque-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.3));
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  z-index: 0;
+}
+
+.mosque-dome {
+  width: 80px;
+  height: 80px;
+  background: rgba(255,215,0,0.1);
+  border-radius: 50% 50% 0 0;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.mosque-dome::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 30px;
+  background: rgba(255,215,0,0.1);
+  border-radius: 40% 40% 0 0;
+}
+
+.mosque-minaret {
+  width: 30px;
+  height: 120px;
+  background: rgba(255,215,0,0.1);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.mosque-minaret::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: rgba(255,215,0,0.2);
+  border-radius: 50%;
+}
+
+/* البطاقة الرئيسية */
+.card {
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 40px;
+  padding: 40px 30px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,215,0,0.2);
+  transition: all 0.4s;
+  position: relative;
+  z-index: 10;
+  border: 1px solid rgba(255,215,0,0.3);
   overflow: hidden;
 }
 
-/* خلفية متحركة فاخرة */
-body::before {
+/* الزخرفة الإسلامية */
+.card::before {
   content: '';
   position: absolute;
+  top: -50%;
+  left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 70% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 10% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-  animation: rotate 30s linear infinite;
+  background: radial-gradient(circle, rgba(255,215,0,0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: patternMove 20s linear infinite;
+  pointer-events: none;
 }
 
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes patternMove {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.container {
-  position: relative;
-  width: 90%;
-  max-width: 400px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 40px;
-  padding: 40px 25px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
-              inset 0 1px 1px rgba(255, 255, 255, 0.1);
-  transform: translateY(0);
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-/* الحواف المضيئة */
-.container::before {
+/* الزاوية الذهبية */
+.card::after {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #6366f1, #a855f7, #ec4899, #6366f1);
-  border-radius: 42px;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s;
-  filter: blur(10px);
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, transparent 100%);
+  border-radius: 0 0 100px 0;
 }
 
-.container:hover::before {
-  opacity: 0.5;
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 0 2px rgba(255,215,0,0.4);
 }
 
-.profile-section {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.profile-img-wrapper {
-  position: relative;
+/* الصورة الشخصية */
+.profile-pic {
   width: 120px;
   height: 120px;
-  margin: 0 auto 20px;
-}
-
-.profile-img {
-  width: 100%;
-  height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid transparent;
-  background: linear-gradient(45deg, #6366f1, #a855f7, #ec4899) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  padding: 3px;
+  margin-bottom: 20px;
+  border: 4px solid #ffd700;
+  box-shadow: 0 0 30px rgba(255,215,0,0.3);
+  position: relative;
+  z-index: 2;
+  animation: profileGlow 3s infinite;
 }
 
-.profile-img:hover {
-  transform: scale(1.1) rotate(5deg);
-  transition: 0.5s;
+@keyframes profileGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.3); }
+  50% { box-shadow: 0 0 40px rgba(255,215,0,0.6); }
 }
 
-.status-badge {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  width: 15px;
-  height: 15px;
-  background: #10b981;
-  border: 3px solid #1f1a3a;
-  border-radius: 50%;
-  animation: pulse 2s infinite;
+/* تحية رمضانية */
+.ramadan-greeting {
+  background: linear-gradient(135deg, #ffd700, #daa520);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: 'Amiri', serif;
+  animation: greetingPulse 2s infinite;
 }
 
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+@keyframes greetingPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 h1 {
-  color: white;
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 5px;
-  background: linear-gradient(135deg, #fff, #cbd5e1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0b1a2e;
+  margin: 5px 0;
 }
 
-.title {
-  color: #94a3b8;
-  font-size: 14px;
-  font-weight: 300;
-  letter-spacing: 1px;
-  margin-bottom: 25px;
+/* أيقونات رمضانية */
+.ramadan-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 15px 0;
+  color: #daa520;
+  font-size: 20px;
 }
 
-/* الساعة بشكل عصري */
-.clock-modern {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
-  padding: 15px;
-  margin-bottom: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+.ramadan-icons i {
+  animation: iconFloat 3s infinite;
 }
 
-.clock-time {
-  font-size: 36px;
-  font-weight: 700;
-  color: white;
-  text-align: center;
-  font-feature-settings: "tnum";
-  letter-spacing: 3px;
-}
+.ramadan-icons i:nth-child(1) { animation-delay: 0s; }
+.ramadan-icons i:nth-child(2) { animation-delay: 0.5s; }
+.ramadan-icons i:nth-child(3) { animation-delay: 1s; }
 
-.clock-date {
-  text-align: center;
-  color: #94a3b8;
-  font-size: 14px;
-  margin-top: 5px;
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
 /* النص القرآني */
-.quran-verse {
-  background: rgba(99, 102, 241, 0.1);
-  border-right: 4px solid #6366f1;
-  padding: 20px;
-  border-radius: 20px;
-  margin-bottom: 25px;
-  font-family: 'Amiri', serif;
-  font-size: 18px;
+.bio-text {
+  color: #2c3e50;
+  font-size: 16px;
   line-height: 2;
-  color: #e2e8f0;
-  text-align: center;
+  margin: 25px 0;
+  padding: 25px 0;
+  border-top: 2px solid rgba(218,165,32,0.2);
+  border-bottom: 2px solid rgba(218,165,32,0.2);
+  font-family: 'Amiri', serif;
   position: relative;
-  overflow: hidden;
 }
 
-.quran-verse::before {
+.bio-text::before,
+.bio-text::after {
   content: '﴿';
   position: absolute;
-  top: 10px;
-  right: 10px;
   font-size: 40px;
-  color: rgba(99, 102, 241, 0.2);
+  color: rgba(218,165,32,0.1);
   font-family: 'Amiri', serif;
 }
 
-.quran-verse::after {
+.bio-text::before {
+  top: -10px;
+  right: -10px;
+}
+
+.bio-text::after {
   content: '﴾';
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  font-size: 40px;
-  color: rgba(99, 102, 241, 0.2);
-  font-family: 'Amiri', serif;
+  bottom: -10px;
+  left: -10px;
 }
 
-/* الأيقونات الاجتماعية بتصميم عصري */
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 25px;
+/* روابط التواصل */
+.social-links {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 25px 0;
 }
 
-.social-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 15px 5px;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  transition: all 0.3s;
-  backdrop-filter: blur(5px);
-}
-
-.social-card:hover {
-  background: rgba(99, 102, 241, 0.2);
-  border-color: #6366f1;
-  transform: translateY(-5px);
-}
-
-.social-card i {
-  font-size: 24px;
-  margin-bottom: 5px;
-  display: block;
-}
-
-.social-card span {
-  font-size: 12px;
-  opacity: 0.8;
-}
-
-.facebook-card i { color: #1877f2; }
-.telegram-card i { color: #0088cc; }
-.instagram-card i { color: #e1306c; }
-
-/* مشغل الصوت العصري */
-.audio-player-modern {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
-  padding: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.audio-controls {
+.social-link {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255,215,0,0.1);
   display: flex;
   align-items: center;
-  gap: 15px;
-  color: white;
-}
-
-.audio-progress {
-  flex: 1;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-}
-
-.audio-progress::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 30%;
-  background: linear-gradient(90deg, #6366f1, #a855f7);
-  border-radius: 5px;
-  animation: progress 3s infinite;
-}
-
-@keyframes progress {
-  0% { width: 0%; }
-  50% { width: 70%; }
-  100% { width: 30%; }
-}
-
-.audio-time {
-  font-size: 12px;
-  color: #94a3b8;
-}
-
-/* زر النسخ */
-.copy-btn-modern {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: white;
-  padding: 8px 15px;
-  border-radius: 50px;
-  font-size: 12px;
-  cursor: pointer;
+  justify-content: center;
+  color: #0b1a2e;
+  text-decoration: none;
   transition: all 0.3s;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: 15px;
+  font-size: 22px;
+  border: 1px solid rgba(218,165,32,0.3);
 }
 
-.copy-btn-modern:hover {
-  background: #6366f1;
-  border-color: #6366f1;
+.social-link:hover {
+  transform: translateY(-5px) scale(1.1);
+  background: #ffd700;
+  color: #0b1a2e;
+  box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+}
+
+/* مؤقت رمضاني */
+.ramadan-timer {
+  background: linear-gradient(135deg, #0b1a2e, #1a2f3f);
+  border-radius: 30px;
+  padding: 15px;
+  margin: 20px 0;
+  color: #ffd700;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid rgba(255,215,0,0.2);
+}
+
+.timer-item {
+  text-align: center;
+}
+
+.timer-label {
+  font-size: 12px;
+  color: #fff;
+  opacity: 0.7;
+}
+
+.timer-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+/* قسم النسخ */
+.copy-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #ffd700, #daa520);
+  padding: 15px 25px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #0b1a2e;
+  font-weight: 600;
+  margin-top: 25px;
+  border: 1px solid rgba(255,215,0,0.5);
+}
+
+.copy-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+  background: linear-gradient(135deg, #daa520, #ffd700);
+}
+
+.copy-section i {
+  font-size: 18px;
+}
+
+#copy-msg {
+  text-align: center;
+  margin-top: 10px;
+  color: #ffd700;
+  font-size: 14px;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+/* أيقونات الطعام الرمضاني */
+.food-icons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0.1;
+  font-size: 30px;
+  color: #daa520;
+  z-index: 1;
 }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="profile-section">
-    <div class="profile-img-wrapper">
-      <img src="n.jpg" alt="عبد الستار محمد" class="profile-img" loading="lazy">
-      <span class="status-badge"></span>
+<div class="ramadan-bg">
+  <!-- النجوم -->
+  <div class="stars">
+    <div class="star" style="top: 20%; right: 30%;"></div>
+    <div class="star" style="top: 40%; left: 20%; animation-delay: 0.5s;"></div>
+    <div class="star" style="top: 60%; right: 50%; animation-delay: 1s;"></div>
+    <div class="star" style="top: 80%; left: 70%; animation-delay: 1.5s;"></div>
+  </div>
+  
+  <!-- الفوانيس -->
+  <div class="lantern lantern-1">🏮</div>
+  <div class="lantern lantern-2">🏮</div>
+  <div class="lantern lantern-3">🏮</div>
+  
+  <!-- الهلال -->
+  <div class="crescent">🌙</div>
+  
+  <!-- المسجد -->
+  <div class="mosque-silhouette">
+    <div class="mosque-minaret"></div>
+    <div class="mosque-dome"></div>
+    <div class="mosque-minaret" style="height: 150px;"></div>
+    <div class="mosque-dome"></div>
+    <div class="mosque-minaret"></div>
+  </div>
+</div>
+
+<div class="card">
+  <!-- أيقونات رمضانية عائمة -->
+  <div class="food-icons">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-utensils"></i>
+  </div>
+  
+  <img src="n.jpg" alt="عبد الستار محمد" class="profile-pic" loading="lazy">
+  
+  <!-- تحية رمضانية -->
+  <div class="ramadan-greeting">
+    🌙 رمضان كريم 🌙
+  </div>
+  
+  <h1>عبد الستار محمد</h1>
+  <div style="color:#666; font-size:14px;">@abd_s99</div>
+  
+  <!-- أيقونات رمضانية -->
+  <div class="ramadan-icons">
+    <i class="fas fa-mosque"></i>
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-star-and-crescent"></i>
+    <i class="fas fa-dates"></i>
+    <i class="fas fa-lanterns"></i>
+  </div>
+  
+  <!-- الآية القرآنية -->
+  <div class="bio-text">
+    الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ
+  </div>
+  
+  <!-- مؤقت رمضاني (اختياري) -->
+  <div class="ramadan-timer">
+    <div class="timer-item">
+      <div class="timer-label">اليوم</div>
+      <div class="timer-value" id="ramadan-day">15</div>
     </div>
-    <h1>عبد الستار محمد</h1>
-    <div class="title">مطور واجهات مستخدم</div>
+    <div class="timer-item">
+      <div class="timer-label">المتبقي</div>
+      <div class="timer-value" id="days-left">15</div>
+    </div>
+    <div class="timer-item">
+      <div class="timer-label">الساعة</div>
+      <div class="timer-value" id="iftar-time">6:45</div>
+    </div>
   </div>
-
-  <div class="clock-modern">
-    <div class="clock-time" id="modern-time">--:--:--</div>
-    <div class="clock-date" id="modern-date">...</div>
-  </div>
-
-  <div class="quran-verse">
-    الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ
-  </div>
-
-  <div class="social-grid">
-    <a href="https://www.facebook.com/share/1633mzZDBh/" target="_blank" class="social-card facebook-card">
+  
+  <!-- روابط التواصل -->
+  <div class="social-links">
+    <a href="https://www.facebook.com/bdalstarmhmdalrbyy" target="_blank" class="social-link">
       <i class="fab fa-facebook"></i>
-      <span>فيسبوك</span>
     </a>
-    <a href="#" class="social-card telegram-card" onclick="copyUsername('@abd_S99'); return false;">
-      <i class="fab fa-telegram"></i>
-      <span>تليجرام</span>
+    <a href="#" class="social-link">
+      <i class="fab fa-twitter"></i>
     </a>
-    <a href="https://www.instagram.com/1_u2z" target="_blank" class="social-card instagram-card">
+    <a href="https://www.instagram.com/_bq.s?igsh=OHhwZ3o5MTVyYnQ2" target="_blank" class="social-link">
       <i class="fab fa-instagram"></i>
-      <span>انستغرام</span>
+    </a>
+    <a href="https://t.me/abd_S99" target="_blank" class="social-link">
+      <i class="fab fa-telegram"></i>
     </a>
   </div>
-
-  <div class="audio-player-modern">
-    <div class="audio-controls">
-      <i class="fas fa-play-circle" style="color:#6366f1; font-size:24px;"></i>
-      <div class="audio-progress"></div>
-      <span class="audio-time">2:45 / 4:30</span>
-    </div>
+  
+  <!-- نسخ المعرف -->
+  <div class="copy-section" onclick="copyUsername('@abd_s99')">
+    <i class="far fa-copy"></i>
+    <span>نسخ معرف التليجرام</span>
   </div>
-
-  <button class="copy-btn-modern" onclick="copyUsername('@abd_S99')">
-    <i class="fas fa-copy"></i>
-    نسخ اسم المستخدم
-  </button>
-  <span id="copy-msg" style="color:#10b981; opacity:0; transition:0.3s; display:block; text-align:center;">تم النسخ!</span>
+  <div id="copy-msg">تم النسخ!</div>
 </div>
 
 <script>
-function copyUsername(username) {
-  navigator.clipboard.writeText(username).then(() => {
-    const msg = document.getElementById('copy-msg');
-    msg.style.opacity = 1;
-    setTimeout(() => msg.style.opacity = 0, 2000);
-  });
+function copyUsername(text) {
+  navigator.clipboard.writeText(text);
+  const msg = document.getElementById('copy-msg');
+  msg.style.opacity = 1;
+  setTimeout(() => msg.style.opacity = 0, 2000);
 }
 
-function updateModernClock() {
-  const now = new Date();
-  const time = now.toLocaleTimeString('ar-EG', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  const date = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+// تحديث مؤقت رمضان (اختياري)
+function updateRamadanTimer() {
+  const today = new Date();
+  const ramadanStart = new Date(2024, 2, 11); // بداية رمضان 1445 (تقريبي)
+  const ramadanEnd = new Date(2024, 3, 9); // نهاية رمضان
   
-  document.getElementById('modern-time').textContent = time;
-  document.getElementById('modern-date').textContent = date;
+  const diffTime = today - ramadanStart;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  const remainingTime = ramadanEnd - today;
+  const remainingDays = Math.ceil(remainingTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays > 0 && diffDays <= 30) {
+    document.getElementById('ramadan-day').textContent = diffDays;
+    document.getElementById('days-left').textContent = remainingDays;
+  }
+  
+  // وقت الإفطار التقريبي (6:45 مساءً)
+  document.getElementById('iftar-time').textContent = '6:45 م';
 }
 
-updateModernClock();
-setInterval(updateModernClock, 1000);
+updateRamadanTimer();
 </script>
 </body>
 </html>
